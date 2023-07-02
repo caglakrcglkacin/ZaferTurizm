@@ -1,0 +1,35 @@
+﻿@model BiletDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Role Ekle</h3>
+        <a href="/Vehicle/Creating"><b>Admin</b>LTE</a>
+    </div>
+    <form class="form-horizontal" action="/Bilet/BiletBul" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Sefer Numarası</label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="SeferNumara" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Verildiği Tarih </label>
+                <div class="col-sm-10">
+                    <input type="date" asp-for="VerildigiTarihi" class="from-control" />
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info float-right">Bul</button>
+                </div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Bilet Bilgileri</label>
+                <input class="form-control" type="Text"  value="@ViewBag.Adi" readonly />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Bilet Bilgileri</label>
+                <input class="form-control" type="Text"  value="@ViewBag.Bilet" readonly />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,87 @@
+﻿@model OtobusSeferiDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Sefer Ekle</h3>
+    </div>
+    <form class="form-horizontal" action="/Humans/SeferAdd" method="post">
+        <div class="card-body">
+
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <label asp-for="RotaId" class="col-sm-2 col-form-label">Rota</label>
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Rota Gidiş</th>
+                                <th>Rota Varış</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in ViewBag.Rota)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="from-select my-checkbox" value="@item.Id">
+                                    </td>
+                                    <td> </td>
+                                    <td>@item.GidisYonu</td>
+                                    <td>@item.VarisYonu</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>                   
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Özellik</label>
+                <div class="col-sm-10">
+
+                    <select asp-items="(SelectList)ViewBag.vehicleDefintions" asp-for="VehicleDefintionId" class="from-select">
+                        <option>.:: Lütfen Seçiniz ::.</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Tarih</label>
+                <div class="col-sm-10">
+                    <input type="datetime-local"  asp-for="Tarih" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Fiyat</label>
+                <div class="col-sm-10" id="Fiyat">
+                    @Html.TextBoxFor(p=>p.Fiyat)
+                </div>
+            </div>
+            <input type="hidden" asp-for="RotaId">
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info float-right ">Kaydet</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var checkbox = $('.my-checkbox');//jqoery olarak tanımak için 
+            var hidden = $('#RotaId')
+            checkbox.click(function () {
+                if ($(this).is(':checked')) {//checkbox seçildiyse
+                    hidden.val($(this).val());//Başka değişkene değer atama
+                }
+
+            });
+        });
+        //this denilmesi gerekmektedir. Hangi seçili olanı bulmak için 
+    </script>
+}

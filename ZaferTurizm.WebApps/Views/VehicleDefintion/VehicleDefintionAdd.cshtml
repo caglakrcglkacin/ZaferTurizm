@@ -1,0 +1,88 @@
+﻿@model VehicleDefintionDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Role Ekle</h3>
+        <a href="/Vehicle/Creating"><b>Admin</b>LTE</a>
+    </div>
+    <form class="form-horizontal" action="/VehicleDefintion/VehicleDefintionAdd" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Marka</label>
+                <div class="col-sm-10">
+                    <select asp-items="(SelectList)ViewBag.VehicleMake"  id="vehicle_makes" class="from-select">
+                        <option>.:: Lütfen Seçiniz ::.</option>
+                    </select>
+                   
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Marka</label>
+                <div class="col-sm-10">
+              
+                    <select  asp-for="VehicleModelId" class="from-select">
+                        <option>.:: Lütfen Seçiniz ::.</option>
+                    </select>
+                  
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Yıl</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(p=>p.Year)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Koltuk Sayısı</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(p=>p.SeatCount)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Wifi</label>
+                <div class="col-sm-10">
+                    @Html.CheckBoxFor(p=>p.HasWifi)
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Tuvalet</label>
+                <div class="col-sm-10">
+                    @Html.CheckBoxFor(p=>p.HasTailet)
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info float-right">Kaydet</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script>
+        //let formElements = document.getElementById('vehicle_makes');
+        let vehicleMakeSelect = document.querySelector('#vehicle_makes');
+       vehicleMakeSelect.addEventListener('change',function(){
+          $.ajax({
+           
+                url: `/VehicleModel/GetVehicleModelsByMakeId?vehicleMakeId=${this.value}`,
+                method: 'get',
+                success: function(vehicleModels){
+                 
+                    var vehicleModelsSelect = document.querySelector('#VehicleModelId');
+                    vehicleModelsSelect.innerHTML = null;
+                    for(let vehicleModel of vehicleModels )
+                    {
+                      let optionElement =  document.createElement('option');
+                        optionElement.value = vehicleModel.id;
+                        optionElement.innerHTML = vehicleModel.name;
+
+                        vehicleModelsSelect.appendChild(optionElement);
+                    }
+                }
+          });
+          
+       });
+
+    </script>
+}

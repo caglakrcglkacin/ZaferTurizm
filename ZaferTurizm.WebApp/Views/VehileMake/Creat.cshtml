@@ -1,0 +1,21 @@
+﻿@using ZaferTurizm.Dtos
+@model VehicleMakeDto
+
+<form class="form-horizontal" action="/VehileMake/Creat" method="post">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="rolename" class="col-sm-2 col-form-label">Adınız</label>
+            <div class="col-sm-12">
+                @Html.TextBoxFor(p=>p.Name)
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-dark float-right">Vazgeç</button>
+        <button type="submit" class="btn btn-info float-right">Kaydet</button>
+    </div>
+
+
+
+</form>
+</div>

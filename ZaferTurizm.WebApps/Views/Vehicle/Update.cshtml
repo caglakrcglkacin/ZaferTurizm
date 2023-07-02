@@ -1,0 +1,23 @@
+﻿@model VehicleMakeDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Role Update</h3>
+        <a href="/Vehicle/Creating"><b>Admin</b>LTE</a>
+    </div>
+    <form class="form-horizontal" action="/Vehicle/Update" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+                 <input type="hidden" name="Id" value="@Model.Id"/>
+                <label for="rolename" class="col-sm-2 col-form-label">Marka Adı</label>
+                <div class="col-sm-10">
+                   <input class="from-control border-1 border-secondary" name="Name" value="@Model.Name"/>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        
+            <button type="submit" class="btn btn-info float-right">Kaydet</button>
+        </div>
+    </form>
+</div>

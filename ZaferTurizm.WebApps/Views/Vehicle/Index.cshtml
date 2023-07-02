@@ -1,0 +1,70 @@
+﻿@model List<VehicleMakeDto>
+
+<div class="row">
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Responsive Hover Table</h3>
+
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <a class="btn btn-primary float-right" href="/Vehicle/Creating">
+                        <i class="fa-solid fa-plus"></i>Marka Ekle
+                    </a>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Adı</th>
+                        <th>Butonlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>
+                                <a class="btn btn-info" href="/Vehicle/Update/@item.Id">Güncelle</a>
+                                <form method ="post" asp-controller="Vehicle" asp-action="Delete" class ="d-inline">                                     
+                                    <input type="hidden" name="Id" value="@item.Id">
+                                    <button  class="btn btn-dange ">Sil</button>
+                                </form>
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts{
+    <script>
+   let formElements = document.getElementsByTagName('form');
+   for (let i = 0;i<formElements.length;i++)
+   {
+       formElements[i].addEventListener('submit',function(eventArgs){
+         let confirmed = confirm("Dikkat! Bu Kayıt Silinecek,devam etmek istermisiniz");
+           if(!confirmed)
+           {
+               eventArgs.preventDefault();
+           }
+       });
+   }
+
+</script>
+}

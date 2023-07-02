@@ -1,0 +1,96 @@
+﻿@model VehicleDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Role Ekle</h3>
+        <a href="/Vehicle/Creating"><b>Admin</b>LTE</a>
+    </div>
+    <form class="form-horizontal" action="/Vehicles/VehicleAdd" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Marka</label>
+                <div class="col-sm-10">
+                    <select asp-items="(SelectList)ViewBag.VehicleMake" id="vehicle_makes" class="from-select"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Model</label>
+                <div class="col-sm-10">
+                  
+                    <select asp-for="VehicleModelId"  class="from-select"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label for="rolename" class="col-sm-2 col-form-label">Yıl</label>
+                <div class="col-sm-10">
+                    <select asp-for="VehicleDefintionId" class="from-select"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Plaka No</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(p=>p.PlateNumber)
+                </div>
+            </div>
+          
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info float-right">Kaydet</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <script>
+        //let formElements = document.getElementById('vehicle_makes');
+        let vehicleMakeSelect = document.querySelector('#vehicle_makes');
+        vehicleMakeSelect.addEventListener('change', function () {
+            $.ajax({
+
+                url: `/VehicleModel/GetVehicleModelsByMakeId?vehicleMakeId=${this.value}`,
+                method: 'get',
+                success: function (vehicleModels) {
+
+                    var vehicleModelsSelect = document.querySelector('#VehicleModelId');
+                    vehicleModelsSelect.innerHTML = null;
+                    for (let vehicleModel of vehicleModels) {
+                        let optionElement = document.createElement('option');
+                        optionElement.value = vehicleModel.id;
+                        optionElement.innerHTML = vehicleModel.name;
+
+                        vehicleModelsSelect.appendChild(optionElement);
+                    }
+                }
+            });
+
+        });
+
+    </script>
+    <script>
+        //let formElements = document.getElementById('vehicle_makes');
+        let vehicleModelSelect = document.querySelector('#VehicleModelId');
+        vehicleModelSelect.addEventListener('change', function () {
+            $.ajax({
+
+                url: `/VehicleDefintion/VehicleDefintedId?Id=${this.value}`,
+                method: 'get',
+                success: function (vehicleDefintions) {
+
+                    var vehicleDefintionsSelect = document.querySelector('#VehicleDefintionId');
+                    vehicleDefintionsSelect.innerHTML = null;
+                    for (let vehicleDefintes of vehicleDefintions) {
+                        let optionElement = document.createElement('option');
+                        optionElement.value = vehicleDefintes.id;
+                        optionElement.innerHTML = vehicleDefintes.year;
+
+                        vehicleDefintionsSelect.appendChild(optionElement);
+                    }
+                }
+            });
+
+        });
+
+    </script>
+}

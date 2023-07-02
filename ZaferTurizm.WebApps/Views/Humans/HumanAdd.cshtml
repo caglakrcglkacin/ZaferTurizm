@@ -1,0 +1,59 @@
+﻿@model HumanDto
+
+<div class="card card-secondary">
+    <div class="card-header">
+        <h3 class="card-title">Kullanıcı Ekle</h3>
+        
+    </div>
+    <form class="form-horizontal" action="/Humans/HumanAdd" method="post">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Adı</label>
+                <div class="col-sm-10">
+                   <input type="text" asp-for="Name" class="from-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Soyadı</label>
+                <div class="col-sm-10">
+                 <input type="text" asp-for="Surname" class="from-control"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Telefon</label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Phone" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Mail</label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Mail" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Kimlik</label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Kimlik" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Doğum Tarihi</label>
+                <div class="col-sm-10">
+                    <input type="datetime-local" asp-for="BirhtDay" class="from-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rolename" class="col-sm-2 col-form-label">Cinsiyet</label>
+                <div class="col-sm-10">
+                    <select asp-items="Model.CinsiyetList" asp-for="Cinsiyet" class="from-select">
+                        <option>.:: Lütfen Seçiniz ::.</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info float-right">Kaydet</button>
+        </div>
+    </form>
+</div>
